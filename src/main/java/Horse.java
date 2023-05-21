@@ -1,3 +1,5 @@
+import java.util.Random;
+
 import static java.util.Objects.isNull;
 
 public class Horse {
@@ -48,3 +50,14 @@ public class Horse {
         return (Math.random() * (max - min)) + min;
     }
 }
+
+//class Animal {
+//    int counter;
+//    public void move() {
+//        counter += getRandomNumber(1, 10);
+//    }
+//
+//    public static int getRandomNumber(int min, int max) {
+//        return new Random().nextInt(min, max);
+//    }
+//}
