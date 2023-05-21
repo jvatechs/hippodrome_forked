@@ -1,9 +1,7 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockito.Incubating;
 import org.mockito.MockedStatic;
-import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -66,18 +64,16 @@ class HorseTest {
         assertEquals(0, horse_2args.getDistance());
     }
 
-    @Test //here must be test for move()
+    @Test
     public void checkMove_IsCall_GetRandomDoubleWithArgs() {
 
         try (MockedStatic<Horse> mockedStatic = mockStatic(Horse.class)) {
-            mockedStatic.verify(() -> Horse.getRandomDouble(0.2, 0.9));
+            mockedStatic.when(() -> Horse.getRandomDouble(0.2, 0.9)).thenReturn(0.5);
+
+            horse.move();
+            assertEquals(55, horse.getDistance());
+
+            mockedStatic.verify(() -> Horse.getRandomDouble(0.2, 0.9), times(1));
         }
     }
-
-//    @Test
-//    void tryVerifyStaticMethod() {
-//        try (MockedStatic<Animal> mockedStatic = mockStatic(Animal.class)) {
-//            mockedStatic.verify(() -> Animal.getRandomNumber(1, 10), times(1));
-//        }
-//    }
 }
